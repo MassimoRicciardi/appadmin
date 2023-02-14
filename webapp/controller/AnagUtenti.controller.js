@@ -28,14 +28,8 @@ sap.ui.define([
         var PageController = Controller.extend("Admin.appadmin.controller.AdminTilePage", {
             formatter: formatter,
             onInit: function () {
-                // this._oTable = this.byId("list");
-                // this._oVSD = null;
-                // this._sSortField = null;
-                // this._bSortDescending = false;
-                // this._aValidSortFields = ["ID_UTENTE", "COGNOME_UTENTE", "NOME_UTENTE"];
-                // this._sSearchQuery = null;
+                
     
-                // this._initViewSettingsDialog();
 
 //1)applySortGroup v2
 this.bDescending = true;
@@ -425,7 +419,7 @@ this.bDescending = true;
 
                 oContext.setProperty("COGNOME_UTENTE", cognome);
                 oContext.setProperty("NOME_UTENTE", nome);
-                oContext.setProperty("ID_RUOLO", ruolo);
+                oContext.setProperty("ID_RUOLO_ID_RUOLO", ruolo);
                 oContext.setProperty("EMAIL_UTENTE", email);
                 oContext.setProperty("TELEFONO_UTENTE", telefono);
                 this.getView().getModel().submitBatch();
@@ -527,7 +521,7 @@ this.bDescending = true;
             _showDetail: function (oItem) {
                 var id = oItem.getBindingContext().getProperty("ID_UTENTE"); //prendo l'elemento da selezionare tramite id nella master page
 
-                var ruoloNumerico = oItem.getBindingContext().getProperty("ID_RUOLO");
+                var ruoloNumerico = oItem.getBindingContext().getProperty("ID_RUOLO_ID_RUOLO");
                 // console.log(ruoloNumerico);
                 this.getView().byId("detail").bindElement({ path: "/Anagrafica_Utenti/" + id });
                 //  if (ruoloNumerico === 1) {
