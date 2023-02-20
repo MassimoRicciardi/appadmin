@@ -214,7 +214,7 @@ this.bDescending = true;
                 var sAction = oEvent.getSource().getMetadata().getName();
                 sAction = sAction.replace(oEvent.getSource().getMetadata().getLibraryName() + ".", "");
 
-                var sStatusText = sAction + " ciao " + oEvent.getSource().getSelectedItem().getText();
+                var sStatusText = sAction  + oEvent.getSource().getSelectedItem().getText();
                 MessageToast.show("Selected: " + sStatusText);
             },
             onPositionChange: function (oEvent) {
@@ -316,13 +316,13 @@ this.bDescending = true;
                 var id = parseInt(this.getView().byId("idAdd").getValue());
                 var cognome = this.getView().byId("cognomeAdd").getValue();
                 var nome = this.getView().byId("nomeAdd").getValue();
-                var ruolo = parseInt(this.getView().byId("ruoloAdd").getValue());
+                var ruolo = parseInt(this.getView().byId("ruoloAdd").getSelectedKey());
                 var email = this.getView().byId("emailAdd").getValue();
                 var telefono = this.getView().byId("telefonoAdd").getValue();
                 this.byId("id").setProperty("editable", false);
                 this.byId("cognome").setProperty("editable", false);
                 this.byId("nome").setProperty("editable", false);
-                this.byId("ruolo").setProperty("editable", false);
+                this.byId("ruoloAdd").setProperty("editable", false);
                 this.byId("email").setProperty("editable", false);
                 this.byId("telefono").setProperty("editable", false);
 
@@ -408,30 +408,43 @@ this.bDescending = true;
                 this.byId("deleteBtn").setProperty("visible", false);
                 this.byId("exitBtn").setProperty("visible", false);
                 this.byId("editBtn").setProperty("visible", true);
+                this.byId("id").setProperty("editable", false);
+                this.byId("cognome").setProperty("editable", false);
+                this.byId("nome").setProperty("editable", false);
+                this.byId("ruolo").setProperty("editable", false);
+                this.byId("email").setProperty("editable", false);
+                this.byId("telefono").setProperty("editable", false);
 
                 var cognome = this.getView().byId("cognome").getValue();
                 var nome = this.getView().byId("nome").getValue();
-                var ruolo = this.getView().byId("ruolo").getValue();
+                var ruolo = parseInt(this.getView().byId("ruoloAdd").getSelectedKey());
                 var email = this.getView().byId("email").getValue();
                 var telefono = this.getView().byId("telefono").getValue();
 
+                if (ruolo == "Admin") {
+
+                    oContext.setProperty("ID_RUOLO", 1);
+
+                } else if (ruolo == "Technical") {
+
+                    oContext.setProperty("ID_RUOLO", 2);
+
+                } else if (ruolo == "Consumer") {
+
+                    oContext.setProperty("ID_RUOLO", 3);
+
+                } else {
+
+                }
                 var oContext = this.getView().byId("detail").getBindingContext();
 
                 oContext.setProperty("COGNOME_UTENTE", cognome);
                 oContext.setProperty("NOME_UTENTE", nome);
-                oContext.setProperty("ID_RUOLO_ID_RUOLO", ruolo);
+                oContext.setSelectedKey("ID_RUOLO", ruolo);
                 oContext.setProperty("EMAIL_UTENTE", email);
                 oContext.setProperty("TELEFONO_UTENTE", telefono);
                 this.getView().getModel().submitBatch();
 
-                // this.byId("id").setProperty("editable", false);
-                // this.byId("cognome").setProperty("editable", false);
-                // this.byId("nome").setProperty("editable", false);
-                // this.byId("ruolo").setProperty("editable", false);
-                // this.byId("email").setProperty("editable", false);
-                // this.byId("telefono").setProperty("editable", false);
-
-                // MessageToast.show("salvato");
 
 
             },
@@ -536,8 +549,7 @@ this.bDescending = true;
             },
 
             onSearch: function (oEvt) {
-                // var oView = this.getView();
-                // var sQuery = oView.byId("searchField").getValue;
+             
                 var sQuery = oEvt.getParameter("query");
                 var aFilters = []
                 var oFilter = null 
@@ -582,52 +594,12 @@ this.bDescending = true;
 
                 
 
-                // var sQuery = oEvt.getParameter("query"),
-                //     aFilter = [new Filter("COGNOME_UTENTE", FilterOperator.Contains, sQuery),
-                //     new Filter("NOME_UTENTE", FilterOperator.Contains, sQuery),
-                //     new Filter("ID_UTENTE", FilterOperator.EQ, sQuery),
-                //     ],
-                //     oTable = this.byId("list"),
-                //     oBinding = oTable.getBinding("items"),
-                //     oFilter = null;
-                // if (sQuery.length != 0) {
-                //     oFilter = new Filter({
-                //         filters: aFilter,
-                //         and: false
-                //     });
-                // }
+              
                 var oBinding = this.getView().byId("list").getBinding("items");
                 oBinding.filter(oFilter);
             },
 
-            // onSort: function(oEvent){
-
-
-            // }
-
-        //     filtraTutto: function(oEvt) {
-        //         var sQuery = oEvt.getParameter("query"),
-        //          aFilter = [new Filter("id",FilterOperator.Contains,sQuery),
-        //          new Filter("nome",FilterOperator.Contains,sQuery),
-        //          new Filter("tel",FilterOperator.Contains,sQuery),
-        //          new Filter("ragiones",FilterOperator.Contains,sQuery),
-        //          new Filter("email",FilterOperator.Contains,sQuery),
-        //          new Filter("fatturato",FilterOperator.Contains,sQuery),
-        //          new Filter("piva",FilterOperator.Contains,sQuery),
-        //          new Filter("citta",FilterOperator.Contains,sQuery),
-        //         ],
-        //          oTable = this.byId("table"),
-        //          oBinding = oTable.getBinding("rows"),
-        //          oFilter = null;
-        //             if(sQuery.length!=0){
-        //                 oFilter = new Filter({
-        //                 filters: aFilter,
-        //                 and : false
-        //                  });
-        //   }      
-        //   oBinding.filter(oFilter);
-        //     },
-
+           
 
         });
 

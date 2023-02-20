@@ -48,9 +48,9 @@
 					<semantic:FilterSelect change="onSemanticSelectChange"
 										 items="{
 							path: '/Anagrafica_Ruoli',
-							filter: { path: 'ID_RUOLO_ID_RUOLO'}
+							filter: { path: 'ID_RUOLO'}
 							}">
-						<core:Item key="cia" text="ciao"/>
+						<core:Item key="cia" text="{ID_RUOLO}"/>
 					</semantic:FilterSelect>
 				</semantic:filter>
 
@@ -93,7 +93,7 @@
 
 
                        <Label text="ruolo" />
-                       <Input id="ruolo" value="{ID_RUOLO_ID_RUOLO, formatter: '.formatter.idRuoloToString'}" editable="false" />
+                       <Input id="ruolo" value="{ID_RUOLO_ID_RUOLO}" editable="false" />
 
                         <Label text="email" />
                         <Input id="email" value="{EMAIL_UTENTE}" editable="false" />
